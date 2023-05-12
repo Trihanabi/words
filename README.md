@@ -4,8 +4,8 @@ This program based on the Harvard CS50 word problem set. The goal is to quickly 
 distinguish words of different difficulty, to help English learners learn words in articles or books.
 
 ### User's guide:
-1. dictionaries folder: dictionaries
-   large         a big dictionary include 143091 words(from CS50)
+1. dictionaries folder: dictionaries\
+   large         a big dictionary include 143091 words(from CS50)\
    2000_word.txt Top 2000 Vocabulary Words
 3. texts: articles or books
 4. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt \

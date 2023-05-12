@@ -5,8 +5,8 @@ distinguish words of different difficulty, to help English learners learn words 
 
 ### User's guide:
 1. dictionaries folder: dictionaries\
-   large         a big dictionary include 143091 words(from CS50)\
-   2000_word.txt Top 2000 Vocabulary Words
+   large:&nbsp;&nbsp;&nbsp;&nbsp a big dictionary include 143091 words(from CS50)\
+   2000_word.txt:&nbsp;&nbsp;&nbsp;&nbsp Top 2000 Vocabulary Words
 3. texts: articles or books
 4. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt \
    File Directory &nbsp;&nbsp;&nbsp;[Program] [Dictionary] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Book/Article]

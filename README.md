@@ -6,7 +6,7 @@ distinguish words of different difficulty, to help English learners learn words 
 ### User's guide:
 1. dictionaries folder: dictionaries
 2. texts: articles or books
-3. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt 
+3. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt \
    File Directory    Program Dictionary                 Book/Article
 
 ### Measuring impact

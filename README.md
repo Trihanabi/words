@@ -23,12 +23,12 @@ distinguish words of different difficulty, to help English learners learn words 
 2. It can count the frequency of words.
 
 ### Implementation details(dictionary.c file):
-1.1 The first function we can build a hash table of words in dictionary firstly.
-1.2 Then use check() to check if word in dictionary and calculate percentage of word.
-2.1 The second function we need to count the number of occurrences.
-    2.1.1 Build a hash table of this article.
-    2.1.2 Check if this word is repeated.
-    2.1.3 If repeated, add number of this word occurrence.
-          If it is not repeated, add this word to hashtable of this article.
+1.1 The first function we can build a hash table of words in dictionary firstly.\
+1.2 Then use check() to check if word in dictionary and calculate percentage of word.\
+2.1 The second function we need to count the number of occurrences.\
+    2.1.1 Build a hash table of this article.\
+    2.1.2 Check if this word is repeated.\
+    2.1.3 If repeated, add number of this word occurrence.\
+          If it is not repeated, add this word to hashtable of this article.\
 
 ### Open Questions

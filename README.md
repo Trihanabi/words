@@ -7,7 +7,7 @@ distinguish words of different difficulty, to help English learners learn words 
 1. dictionaries folder: dictionaries
 2. texts: articles or books
 3. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt \
-   File Directory &nbsp;&nbsp;&nbsp;[Program] [Dictionary] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Book/Article]
+   File Directory &nbsp;&nbsp;&nbsp;[Program] [Dictionary] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Book/Article]
 
 ### Measuring impact
 1. It can simplify my learning english - In progress
@@ -29,6 +29,6 @@ distinguish words of different difficulty, to help English learners learn words 
 &nbsp;&nbsp;&nbsp;2.1.1 Build a hash table of this article.\
 &nbsp;&nbsp;&nbsp;2.1.2 Check if this word is repeated.\
 &nbsp;&nbsp;&nbsp;2.1.3 If repeated, add number of this word occurrence.\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If it is not repeated, add this word to hashtable of this article.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If it is not repeated, add this word to hashtable of this article.
 
 ### Open Questions

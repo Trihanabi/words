@@ -7,7 +7,7 @@ distinguish words of different difficulty, to help English learners learn words 
 1. dictionaries folder: dictionaries
 2. texts: articles or books
 3. ~/word/speller/ ./speller dictionaries/2000_word.txt texts/gatsby.txt \
-   File Directory &nbsp;&nbsp;&nbsp;Program Dictionary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Book/Article
+   File Directory &nbsp;&nbsp;&nbsp;[Program] [Dictionary] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Book/Article]
 
 ### Measuring impact
 1. It can simplify my learning english - In progress

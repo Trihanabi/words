@@ -17,12 +17,16 @@ distinguish words of different difficulty, to help English learners learn words 
 
 ### Goals
 1. Quickly generate a word dictionary with the number of occurrences from an English book. - Complete
-2. Generate a difficult word list - Not start
+2. Generate a difficult word list - In progress
 3. Add python version - Not start - Not start
 
-### Plan
-1. It can give an dictionary, this program can analysis dictionary word percentage of word.
-2. It can count the frequency of words.
+### Plan & Next steps
+1. It can give an dictionary, this program can analysis dictionary word percentage of word. √
+2. It can count the frequency of words. √
+3. Add more common words list. 
+&nbsp;&nbsp;&nbsp;&nbsp;3.1 2000 words list with videos or audios.\
+&nbsp;&nbsp;&nbsp;&nbsp;3.2 speaking and writing Words lists in Longman Dictionary.\
+4. Hard word list can build word Anki Memory Cards automatically
 
 ### Implementation details(dictionary.c file):
 1.1 The first function we can build a hash table of words in dictionary firstly.\

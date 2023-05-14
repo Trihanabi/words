@@ -24,8 +24,8 @@ distinguish words of different difficulty, to help English learners learn words 
 - [x] 1. It can give an dictionary, this program can analysis dictionary word percentage of word. 
 - [x] 2. It can count the frequency of words.
 - [ ] 3. Add more common words list. \
-- [ ] 3.1 2000 words list with videos or audios. \
-- [ ] 3.2 speaking and writing Words lists in Longman Dictionary. \
+&nbsp;&nbsp;&nbsp;&nbsp;3.1 2000 words list with videos or audios. \
+&nbsp;&nbsp;&nbsp;&nbsp;3.2 speaking and writing Words lists in Longman Dictionary. \
 - [ ] 4. Hard word list can build word Anki Memory Cards automatically
 
 ### Implementation details(dictionary.c file):

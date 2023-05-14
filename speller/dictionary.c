@@ -218,22 +218,33 @@ void display(void)
 
 bool record(char *text)
 {
-    FILE *fp;
+    FILE *fp, *fp_hard;
     // build new file name
     char* dest = strtok(text, ".");
     printf("%s\n", dest);
     dest = strstr(dest, "/");
     dest++;
+    char dest_hard[20];
+    strcpy(dest_hard, dest);
     char* suffix = "_record.txt";
-    printf("%s\n", dest);
+    char* suffix2 = "_hard.txt";
+    // printf("%s\n", dest);
     strcat(dest, suffix);
-    printf("%s\n", dest);
+    strcat(dest_hard, suffix2);
+    // printf("%s\n", dest);
     fp = fopen(dest, "w");
+    fp_hard = fopen(dest_hard, "w");
 
     // if file is empty, close the file and return false
     if (fp == NULL)
     {
-        puts("file open failed");
+        puts("fp file open failed");
+        return false;
+    }
+
+    if (fp_hard == NULL)
+    {
+        puts("hard file open failed");
         return false;
     }
 
@@ -249,7 +260,10 @@ bool record(char *text)
             {
                 if (p->rank == (words+1))
                 {
-                    fprintf(fp, "%-5d%-45s%-4d  %d\n",p->rank, p->word, p->num, p->in_dictionary);
+                    fprintf(fp, "%-6d%-45s%-4d  %d\n",p->rank, p->word, p->num, p->in_dictionary);
+                    if (!p->in_dictionary && strlen(p->word)!=1) {
+                        fprintf(fp_hard, "%-6d%-45s%-4d  %d\n",p->rank, p->word, p->num, p->in_dictionary);
+                    }
                     flag = false;
                     break;
                 }
@@ -258,6 +272,7 @@ bool record(char *text)
         }
     }
     fclose(fp);
+    fclose(fp_hard);
     return true;
 }
 

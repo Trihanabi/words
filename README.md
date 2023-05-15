@@ -24,8 +24,8 @@ distinguish words of different difficulty, to help English learners learn words 
 - [x] 1. It can give an dictionary, this program can analysis dictionary word percentage of word. 
 - [x] 2. It can count the frequency of words.
 - [ ] 3. Hard word list can build word Anki Memory Cards automatically\
-&nbsp;&nbsp;&nbsp;&nbsp;3.1connect to the e-dictionary using its API or web interface. it may need to register and obtain an API key if required.\
-&nbsp;&nbsp;&nbsp;&nbsp;3.2use the e-dictionary's API to automate this process.
+&nbsp;&nbsp;&nbsp;&nbsp;3.1 connect to the e-dictionary using its API or web interface. it may need to register and obtain an API key if required.\
+&nbsp;&nbsp;&nbsp;&nbsp;3.2 use the e-dictionary's API to automate this process.
 - [ ] 4. Add more common words list. \
 &nbsp;&nbsp;&nbsp;&nbsp;4.1 2000 words list with videos or audios. \
 &nbsp;&nbsp;&nbsp;&nbsp;4.2 speaking and writing Words lists in Longman Dictionary. 

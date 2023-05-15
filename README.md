@@ -25,6 +25,7 @@ distinguish words of different difficulty, to help English learners learn words 
 - [x] 2. It can count the frequency of words.
 - [ ] 3. Hard word list can build word Anki Memory Cards automatically\
 &nbsp;&nbsp;&nbsp;&nbsp;3.1 connect to the e-dictionary using its API or web interface. it may need to register and obtain an API key if required.\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a. JinShan b.Anki c.Cambridge d.Oxford \
 &nbsp;&nbsp;&nbsp;&nbsp;3.2 use the e-dictionary's API to automate this process.
 - [ ] 4. Add more common words list. \
 &nbsp;&nbsp;&nbsp;&nbsp;4.1 2000 words list with videos or audios. \

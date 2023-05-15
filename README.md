@@ -18,7 +18,7 @@ distinguish words of different difficulty, to help English learners learn words 
 ### Goals
 1. Quickly generate a word dictionary with the number of occurrences from an English book. - Complete
 2. Generate a difficult word list - In progress
-3. Add python version - Not start - Not start
+3. Add python version - Not start
 
 ### Plan & Next steps
 - [x] 1. It can give an dictionary, this program can analysis dictionary word percentage of word. 

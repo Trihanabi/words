@@ -1,0 +1,467 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <title>Remember word</title>
+  <style>
+        .grid {
+            display: grid;
+            grid-template-columns: 15% 15% 15%;
+            grid-gap: 5px;
+            position: relative;
+        }
+        #chinese {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            left: 16%;
+            width: 200px;
+        }
+
+        #next1 {
+            position: absolute;
+            right:69.5%;
+        }
+        #next2 {
+            position: absolute;
+            right: 69.5%;
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .grid:before {
+            content: '';
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .grid-item:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+        .grid-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .btn {
+            width: 70px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div id="app" >
+    <h3>Memorize word: <span v-if="isDataLoaded">{{ word }}</span></h3>
+    <div v-if="isDataLoaded">
+        <div class="grid">
+
+            <div class="grid-item" v-for="(image, index) in randomGraphStrings"
+                    :key="index" :class="graphClassArray[index]"
+                    @click="handleImageClick(index)" >
+                <img :src="'/static/images/'  + image" alt="Image">
+            </div>
+
+            <button  type="button" @click="handleQuit" class="btn btn-outline-primary"
+                    style="margin-left: 0%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Quit</button>
+
+            <!-- Modal 弹出框 -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Record: </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Correct rate: {{correctRate}}%  <br>
+                            Memorize word Number: {{correctNum}}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a th:href="@{/books/list}">
+                                <button type="button" class="btn btn-primary" @click="handleSave">Save</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <span id="chinese" v-show="isRight">
+                {{ chinese }}
+            </span>
+
+            <span style="margin-left:34%;">Have fun!</span>
+                <span v-show="!isRight">
+                    <button id="next1" type="button" @click="handleNext" class="btn btn-outline-success" style="margin-right: -15%;"
+                            disabled="true">Next</button>
+                </span>
+
+                <span v-show="isRight">
+                    <button id="next2" type="button" @click="handleNext" class="btn btn-outline-success" style="margin-right: -15%;">
+                        Next</button>
+                </span>
+        </div>
+
+    </div>
+    <div v-else>
+        <!-- 显示加载中的提示或动画 -->
+        <p>Loading...</p>
+    </div>
+</div>
+
+<!-- 引入 Bootstrap JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>  
+</body>
+<script th:inline="javascript">
+  /* 将数据存储在全局变量中 */
+  var globalData =  /*[[${graphs}]]*/ '';
+</script>
+
+<script th:inline="javascript"> 
+
+    Vue.prototype.$REMEMBERED_LEVEL = 20; 
+    Vue.prototype.$INTERVAL_FACTOR = 10; 
+
+    new Vue({
+        el: '#app',
+        data: {
+            isDataLoaded: false,
+            isRight: false,
+            userWordList:[],
+            graphs: [],
+            randomGraphStrings: [],
+            graphClassArray: Array(8).fill("rounded-1"),
+            userId: null,
+            bookId: null,
+            word: null,
+            chinese: null,
+            rightId: null,
+            clickId: null,
+            rightClickNum: 0,
+            wrongClickNum: 0,
+            correctRate: 0.0,
+            correctNum: 0,
+            learnedWords: new Set(),
+        },
+
+        created() {
+            // 通过页面获取userId和bookId
+            const path = window.location.pathname; // 获取当前页面的路径
+            const pathParts = path.split('/'); // 将路径拆分为部分
+            const ids = pathParts[pathParts.length - 1].split('&'); // 获取最后一个部分作为路径变量的值
+            this.userId = ids[0];
+            this.bookId = ids[1];
+            console.log('Data from Thymeleaf:', globalData);
+            // this.randomGraphStrings = globalData;
+        },
+
+        mounted() {
+            this.executeMethods();
+            setTimeout(() => {
+                this.isDataLoaded = true;
+            }, 3000);
+            this.setRightId();
+            // this.sortList(this.userWordList);
+        },
+
+        methods: {
+            // 处理点击
+            handleImageClick(index) {
+                this.clickId = index;
+                console.log('Clicked image:', index);
+                // 执行其他操作，根据索引index来确定点击的是哪张图片
+                if (!this.isRight) {
+                    if (index == this.rightId) {
+                        console.log('Bingo!!');
+                        this.clickRight(index);
+                    } else {
+                        console.log('Sorry, it\'s not correct.');
+                        this.clickWrong(index);
+                    }
+                }
+            },
+
+            // 从数据库获取数据
+            fetchData() {
+                axios.all([
+                    this.fetchUserWordList(),
+                    this.fetchGraphStrArr(),
+                ])
+                .then(axios.spread((userWordList, graphs) => {
+                    this.userWordList = userWordList.data;
+                    this.graphs = graphs.data;
+                    console.log(this.userWordList);
+                    console.log(this.graphs);
+                    this.isCreated = true;
+                }))
+                .then()
+                .catch(error => {
+                    console.error(error);
+                });
+            },
+
+            // 获取单词列表
+            fetchUserWordList() {
+                return axios.get(`/data/${this.userId}&${this.bookId}`);
+            },
+
+            // 获取图片名集
+            fetchGraphStrArr() {
+                return axios.get(`/data/graphs/${this.bookId}`);
+            },
+            // 从单词列表中获取第一个单词
+            getFirstWord() {
+                // console.log(this.userWordList);
+                this.word = this.userWordList[0].word;
+                this.chinese = this.userWordList[0].chinese;
+                return this.word;
+            },
+
+            // 根据单词得到图片
+            getGraphsStrings(word) {
+                const randomSet = new Set();
+                const wordImage = word + '.webp';
+                randomSet.add(wordImage);
+
+                // 随机选择字符串
+                while (randomSet.size < 8 ) {
+                    const randomIndex = Math.floor(Math.random() * this.graphs.length);
+                    const randomString = this.graphs[randomIndex];
+                    randomSet.add(randomString);
+                }
+                // 将Set转换为数组
+                var tempStrings = Array.from(randomSet);
+                tempStrings.shift();
+                const randomIndex = Math.floor(Math.random() * (tempStrings.length + 1));
+                // 使用 splice() 方法在随机位置插入单词
+                tempStrings.splice(randomIndex, 0, wordImage);
+                this.setRightIdByIndex(randomIndex);
+                // 将Set转换为数组
+                this.randomGraphStrings = tempStrings;
+                console.log(this.randomGraphStrings);
+            },
+
+            //加载数据
+            async executeMethods() {
+                try {
+                    await this.method1();
+                    await this.method2();
+                    await this.method3();
+                    await this.method4();
+                    // 三个方法都执行完成后的逻辑
+                } catch (error) {
+                    // 错误处理
+                    console.error(error);
+                }
+            },
+
+            method1() {
+                return new Promise((resolve, reject) => {
+                    // 方法1的逻辑，包括异步的Ajax请求
+                    setTimeout(() => {
+                    this.fetchData();
+                        resolve('Function 1 executed.');
+                    }, 1000);
+                });
+            },
+
+            method2() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                    this.getFirstWord();
+                        resolve('Function 2 executed.');
+                    }, 1000);
+                });
+            },
+
+            method3() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                    this.getGraphsStrings(this.word);
+                        resolve('Function 3 executed.');
+                    }, 1000);
+
+                });
+            },
+
+            method4() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                    this.setRightId();
+                        resolve('Function 4 executed.');
+                    }, 1000);
+                });
+            },
+
+            // 设定正确图片id
+            setRightId() {
+                const correctAnswer = this.word + '.webp';
+                console.log(correctAnswer);
+                this.randomGraphStrings.forEach((item, index) => {
+                    console.log(item);
+                    if (item == correctAnswer) {
+                        this.rightId = index;
+                        console.log(index);
+                    }
+                })
+            },
+
+            setRightIdByIndex(index) {
+                this.rightId = index;
+            },
+
+            handleNext() {
+                // 在这里定义Next按钮点击时的逻辑
+                this.moveElementToCorrectPosition(this.userWordList, 0, this.memoryComparator);
+                this.learnedWords.add(this.word);
+                this.getFirstWord();
+                this.getGraphsStrings(this.word);
+                this.removeBorder();
+                this.isRight = false;
+            },
+
+            handleQuit() {
+                // 在这里定义Quit按钮点击时的逻辑
+                // 显示背诵结果
+                this.correctRate = (this.rightClickNum / (this.rightClickNum + this.wrongClickNum)*100).toFixed(2);
+                this.correctNum = this.learnedWords.size;
+            
+            },
+
+            handleSave() {
+                // 保存wordList到后端
+                console.log("In handleSave()");
+                this.sendDataToBackend();
+                // this.$router.push('/books/list');
+            },
+
+            // 将数据存储到后端数据库
+            sendDataToBackend() {
+                // 从中获取数据
+                console.log(typeof this.userWordList);
+                console.log(Object.prototype.toString.call(this.userWordList));
+                // 将 formData 对象转换为 JSON 字符串
+                const jsonData = JSON.stringify(this.userWordList);
+                console.log("In sentDataToBackend()");
+                // 发送 POST 请求到后端
+                axios.post(`/data/save/userWordList/${this.userId}&${this.bookId}`
+                            , jsonData, {headers: {'Content-Type': 'application/json'}})
+                .then(response => {
+                    // 请求成功处理
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    // 请求失败处理
+                    console.error(error);
+                });
+            },
+
+            // 对数组进行排序
+            sortList(list) {
+                return list.slice().sort(this.memoryComparator());
+            },
+
+            // 修改首项后根据其记忆程度将其插入到单词列表
+            moveElementToCorrectPosition(list, index) {
+                const element = list[index];
+                let i = index + 1;
+                let interval = list[index].memory_interval;
+                var isMove = true;
+                // 如果没有移动单词，则将单词向后移动一位
+                if (this.memoryComparator(element, list[i]) >= 0) {
+                    isMove = false;
+                }
+                while (i <= list.length - 1 
+                    && this.memoryComparator(element, list[i]) < 0
+                    && interval > 0) {
+                    list[i-1] = list[i];
+                    i++;
+                    interval--;
+                }
+                if (!isMove) {
+                    list[i-1] = list[i];
+                    i++;
+                }
+
+                list[i-1] = element;
+            },
+
+            // 用于比较单词的记忆程度
+            memoryComparator(w1, w2) {
+                if (!w1.is_memory && !w2.is_memory) {
+                    // todo: more complex compare rule
+                    if (w1.memory_level > w2.memory_level) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                }
+                else if (!w1.is_memory) {
+                    return 1;
+                } else if (!w2.is_memory) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            },
+
+            // 点击正确，修改数据
+            clickRight(index) {
+                this.setWordMemoryLevel(2);
+                this.rightClickNum += 1;
+                console.log('inClickRight' + ' '+ index);
+                const newGraphClassArray = [...this.graphClassArray];
+                newGraphClassArray[index] = "rounded-1 border border-4 border border-success";
+                this.graphClassArray = newGraphClassArray;
+                console.log('inClickRight' + ' '+ this.isRight);
+                this.isRight = true;
+            },
+
+            // 点击错误，修改数据
+            clickWrong(index) {
+                console.log('in clickWrong()' + ' '+ index);
+                this.setWordMemoryLevel(-1);
+                this.wrongClickNum += 1;
+                console.log('inClickWrong' + ' '+ index);
+                const newGraphClassArray = [...this.graphClassArray];
+                newGraphClassArray[index] = 'rounded-1 border border-4 border border-danger';
+                this.graphClassArray = newGraphClassArray; 
+            },
+
+            setWordMemoryLevel(variation) {
+                this.userWordList[0].memory_level += variation;
+                const level = this.userWordList[0].memory_level;
+                console.log('in setWordMemoryLevel()' + ' '+ variation);
+                if (level >= this.$REMEMBERED_LEVEL) {
+                    this.userWordList[0].is_memory = true;
+                }
+                this.userWordList[0].memory_interval = Math.abs(level * this.$INTERVAL_FACTOR);
+            },
+
+            removeBorder() {
+                this.graphClassArray = Array(8).fill("rounded-1");
+            },
+        }
+     })
+</script>
+</html>

@@ -116,24 +116,30 @@
             this.userId = ids[0];
             this.bookId = ids[1];
             console.log('Data from Thymeleaf:', globalData);
-            this.randomGraphStrings = globalData;
+            // this.randomGraphStrings = globalData;
 
-            // 从后端获取数据
         },
 
-         mounted() {
-             this.executeMethods();
-                setTimeout(() => {
-                    this.isDataLoaded = true;
-                }, 3000);
-                
-         },
+        mounted() {
+            this.executeMethods();
+            setTimeout(() => {
+                this.isDataLoaded = true;
+            }, 3000);
+            this.setRightId();
+        },
         methods: {
             // 处理点击
             handleImageClick(index) {
                 this.clickId = index;
                 console.log('Clicked image:', index);
                 // 执行其他操作，根据索引index来确定点击的是哪张图片
+                if (index == this.rightId) {
+                    console.log('Bingo!!');
+                    this.clickRight(index);
+                } else {
+                    console.log('Sorry, it\'s not correct.');
+                    this.clickWrong(index);
+                }
             },
 
             // 得到数据
@@ -193,6 +199,7 @@
                 await this.method1();
                 await this.method2();
                 await this.method3();
+                await this.method4();
                 // 三个方法都执行完成后的逻辑
               } catch (error) {
                 // 错误处理
@@ -200,18 +207,17 @@
               }
            },
 
-           method1() {
-              return new Promise((resolve, reject) => {
-                  // 方法1的逻辑，包括异步的Ajax请求
-
-                     setTimeout(() => {
-                     this.fetchData();
+            method1() {
+                return new Promise((resolve, reject) => {
+                    // 方法1的逻辑，包括异步的Ajax请求
+                    setTimeout(() => {
+                    this.fetchData();
                         resolve('Function 1 executed.');
-                      }, 1000);
+                    }, 1000);
                   // 在请求成功后调用 resolve()
                   // 在请求失败时调用 reject()
-              });
-           },
+                });
+            },
 
            method2() {
               return new Promise((resolve, reject) => {
@@ -238,6 +244,31 @@
                   // 在请求失败时调用 reject()
               });
            },
+
+           method4() {
+              return new Promise((resolve, reject) => {
+                  // 方法3的逻辑，包括异步的Ajax请求
+
+                    setTimeout(() => {
+                    this.setRightId();
+                        resolve('Function 4 executed.');
+                      }, 1000);
+                  // 在请求成功后调用 resolve()
+                  // 在请求失败时调用 reject()
+              });
+           },
+
+            setRightId() {
+                const correctAnswer = this.word + '.jpg';
+                console.log(correctAnswer);
+                this.randomGraphStrings.forEach((item, index) => {
+                    console.log(item);
+                    if (item == correctAnswer) {
+                        this.rightId = index;
+                        console.log(index);
+                    }
+                })
+            },
 
             // 对数组进行排序
             sortedList(list) {

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <title>Remember word</title>
+  <style>
+        .grid {
+            display: grid;
+            grid-template-columns: 15% 15% 15%;
+            grid-gap: 5px;
+            width：70%
+        }
+
+<!-- the whole page>
+<!--        .grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(3, 1fr);-->
+<!--            grid-gap: 10px;-->
+<!--        }-->
+
+
+        .grid-item {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+        }
+
+        .grid:before {
+            content: '';
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .grid-item img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;   <!-- 填充图像 -->
+         }
+
+
+    </style>
+</head>
+<body>
+
+<h3>Remember word</h3>
+
+
+
+<div class="grid">
+
+  <div class="grid-item"  th:each="graph: ${graphs}">
+<!--    <span th:text=${graph.address}>-->
+    <img th:src="@{'/static/images/' + ${graph.address}}" alt="Image"  />
+  </div>
+</div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script th:inline="javascript">
+<!--    import axios from 'axios';-->
+    new Vue({
+        el: '#app',
+        data: {
+            userWordList:{},
+            userId: null,
+            bookId: null,
+        },
+        created() {
+            // 通过页面获取userId和bookId
+            const path = window.location.pathname // 获取当前页面的路径
+            const pathParts = path.split('/') // 将路径拆分为部分
+            const ids = pathParts[pathParts.length - 1].split('&') // 获取最后一个部分作为路径变量的值
+            this.userId = ids[0]
+            this.bookId = ids[1]
+            axios.get(`/data/${this.userId}&${this.bookId}`)
+            .then(response => {
+                // 处理获取到的数据
+                userWordList = response.data
+                console.log(userWordList)
+            })
+            .catch(error => {
+                // 处理错误
+                console.error(error)
+            })
+        },
+        mounted() {
+            const images = document.querySelectorAll('.grid-item')
+            images.forEach(image => {
+                image.addEventListener('click', () => {
+                    <!--点击事件处理逻辑-->
+                    alert('Image clicked!')
+                })}
+            )
+        },
+        methods: {
+             // 从单词列表中按照记忆优先级得到一个单词
+
+             // 根据单词得到图片
+
+             // 点击正确，修改数据
+
+             // 点击错误，修改数据
+
+             // 修改记忆数据
+        }
+     })
+</script>
+</html>

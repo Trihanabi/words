@@ -74,8 +74,9 @@
                         <!--                    <img th:src="@{'/static/images/' + ${graph}}" th:data-index="${index.index}"-->
                         <!--                         @click="handleImageClick" />-->
                         <div class="grid-item" v-for="(image, index) in randomGraphStrings"
-                             :key="index" @click="handleImageClick(index)" >
-                            <img :src="'/static/images/'  + image"  alt="Image">
+                             :key="index" :class="graphClassArray[index]"
+                              @click="handleImageClick(index)" >
+                            <img :src="'/static/images/'  + image" alt="Image">
                         </div>
                     </div>
                     <p>Have fun!</p>
@@ -96,15 +97,14 @@
     new Vue({
         el: '#app',
         data: {
-            showComponent: false,
             isDataLoaded: false,
             userWordList:[],
             graphs: [],
             randomGraphStrings: [],
+            graphClassArray: Array(8).fill("rounded-1"),
             userId: null,
             bookId: null,
             word: null,
-            isCreated: false,
             rightId: null,
             clickId: null,
         },
@@ -117,7 +117,6 @@
             this.bookId = ids[1];
             console.log('Data from Thymeleaf:', globalData);
             // this.randomGraphStrings = globalData;
-
         },
 
         mounted() {
@@ -310,14 +309,21 @@
 
             // 点击正确，修改数据
             clickRight(index) {
-                this.userWordList[index].memory_level += 2;
-                this.moveElementToCorrectPosition(this.userWordList, index, this.memoryComparator);
+                // this.userWordList[index].memory_level += 2;
+                console.log('inClickRight' + ' '+ index);
+                const newGraphClassArray = [...this.graphClassArray];
+                newGraphClassArray[index] = "rounded-1 border border-4 border border-success";
+                this.graphClassArray = newGraphClassArray;
             },
 
             // 点击错误，修改数据
             clickWrong(index) {
-                this.userWordList[index].memory_level += 1;
-                this.moveElementToCorrectPosition(this.userWordList, index, this.memoryComparator);
+                console.log('inClickWrong' + ' '+ index);
+                const newGraphClassArray = [...this.graphClassArray];
+                // this.userWordList[index].memory_level += 1;
+                newGraphClassArray[index] = 'rounded-1 border border-4 border border-danger';
+                this.graphClassArray = newGraphClassArray;
+               
             },
 
         }

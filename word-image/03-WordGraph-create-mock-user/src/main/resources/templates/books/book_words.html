@@ -18,6 +18,7 @@
 
     <h4>Book words</h4>
     <h5>Book name: <span th:text=${book.name}> </span> </h5>
+    <form th:action="@{/User}" th:object="${XXXXXXX}" method="POST">
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
@@ -29,12 +30,14 @@
             <tbody>
                 <tr th:each="bookWord: ${bookWordList}">
                     <td th:text="${bookWord.word}" />
+                    <input type="checkbox" name="word" data-target="requests-all"
+                           th:value="${bookWord.word}" th:field="*{requestIds}"/>
                     <td th:text="${bookWord.occurence_freqence}"/>
 
                 </tr>
             </tbody>
         </table>
-
+        <input type="submit" value="Submit" />
     </form>
 
 </div>

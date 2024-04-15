@@ -32,6 +32,9 @@ public class User {
     )
     private Set<Book> books;
 
+    public User() {
+    }
+
     public User(String name) {
         this.name = name;
     }

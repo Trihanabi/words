@@ -58,7 +58,7 @@ public class BookServiceImpl implements BookService {
     @Override
     @Query("SELECT t FROM books t WHERE t.name = ?")
     public boolean isContainName(String name) {
-        if (bookRepository.findByName(name) == null) {
+        if (bookRepository.findByName(name).isEmpty()) {
             return false;
         }
         return true;

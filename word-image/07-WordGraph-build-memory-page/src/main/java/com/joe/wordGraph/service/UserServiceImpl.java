@@ -2,7 +2,6 @@ package com.joe.wordGraph.service;
 
 import com.joe.wordGraph.dao.UserRepository;
 import com.joe.wordGraph.entity.User;
-import com.joe.wordGraph.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;

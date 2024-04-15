@@ -30,6 +30,10 @@ public class UserWord {
         this.fk_word = fk_word;
     }
 
+    public UserWord() {
+
+    }
+
     public int getFk_word() {
         return fk_word;
     }

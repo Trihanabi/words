@@ -15,11 +15,11 @@ public class Graph {
     private String name;
 
     @Column(name="graph_address")
-    private String graph_address;
+    private String address;
 
     public Graph(String name, String graph_address) {
         this.name = name;
-        this.graph_address = graph_address;
+        this.address = graph_address;
     }
 
     public int getId() {
@@ -38,12 +38,12 @@ public class Graph {
         this.name = name;
     }
 
-    public String getGraph_address() {
-        return graph_address;
+    public String getAddress() {
+        return address;
     }
 
-    public void setGraph_address(String graph_address) {
-        this.graph_address = graph_address;
+    public void setAddress(String graph_address) {
+        this.address = graph_address;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Graph {
         return "Graph{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", graph_address='" + graph_address + '\'' +
+                ", graph_address='" + address + '\'' +
                 '}';
     }
 }

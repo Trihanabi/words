@@ -57,19 +57,21 @@ public class BookController {
 
         theModel.addAttribute("bookWordList", bookWordList);
 
-        UserWordList userWordList = new UserWordList();
+        WordList wordList = new WordList();
 
-        theModel.addAttribute("userWordList", userWordList);
+        theModel.addAttribute("wordList", wordList);
 
         return "books/book_words";
     }
 
 
     @PostMapping("/createUserWordList/{bookId}")
-    public String createUserWordList(@ModelAttribute("userWordList") UserWordList theUserWordList
-                                    , @PathVariable int bookId) {
+    public String createUserWordList(@ModelAttribute("wordList") WordList theWordList
+                                    , @PathVariable int bookId) throws IllegalAccessException {
         // log the input data
-        System.out.println(theUserWordList);
+        System.out.println(theWordList);
+
+        UserWordList theUserWordList = userBookService.buildUserWordList(theWordList);
         // use a mock user joe
         User theUser = userService.findFirstByName("joe");
 

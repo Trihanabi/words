@@ -18,7 +18,7 @@
 
     <h4>Book words</h4>
     <h5>Book name: <span th:text=${book.name}> </span> </h5>
-    <form th:action="@{/books/createUserWordList/{id}(id=${book.id})}" th:object="${userWordList}" method="POST">
+    <form th:action="@{/books/createUserWordList/{id}(id=${book.id})}" th:object="${wordList}" method="POST">
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
@@ -30,10 +30,10 @@
 
             <tbody>
                 <tr th:each="bookWord: ${bookWordList}">
-<!--                    todo --> set checked
+                    <!--  todo set checked -->
                     <td><input type="checkbox" th:checked="true"
-                                               th:field="*{words}"
-                                               th:value="${bookWord.word}"/>
+                                               th:field="*{wordsAndOcc}"
+                                               th:value="${bookWord.word}+':'+${bookWord.occurence_freqence}"/>
                     </td>
                     <td th:text="${bookWord.word}"> </td>
                     <td th:text="${bookWord.occurence_freqence}" ></td>

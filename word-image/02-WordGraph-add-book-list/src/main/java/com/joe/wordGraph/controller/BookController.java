@@ -1,8 +1,8 @@
 package com.joe.wordGraph.controller;
 
 import com.joe.wordGraph.entity.Book;
+import com.joe.wordGraph.entity.BookWord;
 import com.joe.wordGraph.service.BookService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class BookController {
 
     // add mapping for "/list"
 
-    @GetMapping("/books")
+    @GetMapping("/list")
     public String listBooks(Model theModel) {
 
         // get the books from db
@@ -32,17 +32,28 @@ public class BookController {
         return "books/list_books";
     }
 
-    @GetMapping("/books/{bookId}")
+    @GetMapping("/{bookId}")
     public String showBookWord(Model theModel, @PathVariable int bookId) {
 
         // get the books from db
         Book theBook = bookService.findById(bookId);
+
         theModel.addAttribute("book", theBook);
 
-        // add to the spring model
+        List<BookWord> bookWordList = bookService.createBookWordList(theBook);
+
+        theModel.addAttribute("bookWordList", bookWordList);
 
         return "books/book_words";
     }
+
+//    @PostMapping("/createUserWordList")
+//    public String createUserWordList(@ModelAttribute("User") Student theStudent) {
+//        // log the input data
+//        System.out.println("theStudent: " + theStudent.getFirstName() + " " + theStudent.getLastName());
+//
+//        return "books/success_created";
+//    }
 
 //    @GetMapping("/showFormForAdd")
 //    public String showFormForAdd(Model theModel) {

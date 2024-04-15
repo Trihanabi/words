@@ -38,7 +38,9 @@
         <tbody>
         <tr th:each="tempBook : ${books}">
 
-            <td th:text="${tempBook.name}" />
+            <td>
+                <a th:href="@{'/books/'+${tempBook.id}}" th:text="${tempBook.name}">  </a>
+            </td>
 
 
 <!--            <td>-->

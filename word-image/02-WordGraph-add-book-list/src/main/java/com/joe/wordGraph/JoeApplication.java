@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JoeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JoeApplication.class, args).close();
+		SpringApplication.run(JoeApplication.class, args);
 	}
 
 }

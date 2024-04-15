@@ -32,16 +32,16 @@ public class User {
     )
     private Set<Book> books;
 
+    public User(String name) {
+        this.name = name;
+    }
+
     public Set<Book> getBooks() {
         return books;
     }
 
     public void setBooks(Set<Book> books) {
         this.books = books;
-    }
-
-    public User(String name) {
-        this.name = name;
     }
 
     public int getId() {

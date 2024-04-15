@@ -65,27 +65,35 @@
 <!--      </div>-->
 
 <!--      <div th:else>-->
-            <div id="app" >
-                <div v-if="isDataLoaded">
-                    <div class="grid">
+    <div id="app" >
+        <div v-if="isDataLoaded">
+            <div class="grid">
 
-                        <!--                <div  class="grid-item"  th:each="graph, index: ${graphs}">-->
+                <!--                <div  class="grid-item"  th:each="graph, index: ${graphs}">-->
 
-                        <!--                    <img th:src="@{'/static/images/' + ${graph}}" th:data-index="${index.index}"-->
-                        <!--                         @click="handleImageClick" />-->
-                        <div class="grid-item" v-for="(image, index) in randomGraphStrings"
-                             :key="index" :class="graphClassArray[index]"
-                              @click="handleImageClick(index)" >
-                            <img :src="'/static/images/'  + image" alt="Image">
-                        </div>
-                    </div>
-                    <p>Have fun!</p>
-                </div>
-                <div v-else>
-                    <!-- 显示加载中的提示或动画 -->
-                    <p>Loading...</p>
+                <!--                    <img th:src="@{'/static/images/' + ${graph}}" th:data-index="${index.index}"-->
+                <!--                         @click="handleImageClick" />-->
+                <div class="grid-item" v-for="(image, index) in randomGraphStrings"
+                        :key="index" :class="graphClassArray[index]"
+                        @click="handleImageClick(index)" >
+                    <img :src="'/static/images/'  + image" alt="Image">
                 </div>
             </div>
+            <p style="margin-left:19%;">Have fun!</p>
+        </div>
+        <div v-else>
+            <!-- 显示加载中的提示或动画 -->
+            <p>Loading...</p>
+        </div>
+        <p v-show="!isRight">
+            <button type="button" class="btn btn-outline-success" style="margin-left: 19%;"
+            disabled="true">Success</button>
+        </p>
+        <p v-show="isRight">
+            <button type="button" class="btn btn-outline-success" style="margin-left: 19%;">
+                Success</button>
+        </p>
+    </div>
 </body>
 <script th:inline="javascript">
   /* 将数据存储在全局变量中 */
@@ -98,6 +106,7 @@
         el: '#app',
         data: {
             isDataLoaded: false,
+            isRight: false,
             userWordList:[],
             graphs: [],
             randomGraphStrings: [],
@@ -108,6 +117,7 @@
             rightId: null,
             clickId: null,
         },
+
         created() {
             // 通过页面获取userId和bookId
             const path = window.location.pathname; // 获取当前页面的路径
@@ -303,7 +313,7 @@
                   } else if (!w2.is_memory()) {
                       return 1;
                   } else {
-                      return 0;
+                      return 0;Ss
                   }
             },
 
@@ -314,6 +324,9 @@
                 const newGraphClassArray = [...this.graphClassArray];
                 newGraphClassArray[index] = "rounded-1 border border-4 border border-success";
                 this.graphClassArray = newGraphClassArray;
+               
+                console.log('inClickRight' + ' '+ this.isRight);
+                this.isRight = true;
             },
 
             // 点击错误，修改数据

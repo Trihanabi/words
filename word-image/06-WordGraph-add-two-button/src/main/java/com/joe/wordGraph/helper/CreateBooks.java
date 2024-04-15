@@ -33,7 +33,7 @@ public class CreateBooks implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // convert files to json array objects
-        String rootPath = "C:\\Projects\\WordGraphs\\04-WordGraph-build-user-word-list\\src\\main\\java\\com\\joe\\wordGraph\\book_word_list";
+        String rootPath = "C:\\Projects\\WordGraphs\\06-WordGraph-add-two-button\\src\\main\\java\\com\\joe\\wordGraph\\book_word_list";
         final File folder = new File(rootPath);
         final List<File> fileList = Arrays.asList(Objects.requireNonNull(folder.listFiles()));
         for (var file: fileList) {

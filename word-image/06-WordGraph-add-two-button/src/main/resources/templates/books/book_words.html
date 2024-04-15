@@ -30,8 +30,10 @@
 
             <tbody>
                 <tr th:each="bookWord: ${bookWordList}">
-                    <td><input type="checkbox"  th:field="*{words}"
-                                                th:value="${bookWord.word}" />
+<!--                    todo --> set checked
+                    <td><input type="checkbox" th:checked="true"
+                                               th:field="*{words}"
+                                               th:value="${bookWord.word}"/>
                     </td>
                     <td th:text="${bookWord.word}"> </td>
                     <td th:text="${bookWord.occurence_freqence}" ></td>

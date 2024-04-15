@@ -10,8 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-@Component
+
 // It is used for Advice execution precedence
+//@Component
 @Order(2)
 @Slf4j
 public class CreateMockUsers implements CommandLineRunner {

@@ -21,6 +21,13 @@
             grid-gap: 5px;
             position: relative;
         }
+        #chinese {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            left: 16%;
+            width: 200px;
+        }
 
         #next1 {
             position: absolute;
@@ -30,6 +37,7 @@
             position: absolute;
             right: 69.5%;
         }
+  
 
         .grid-item {
             position: relative;
@@ -101,6 +109,10 @@
                 </div>
             </div>
 
+            <span id="chinese" v-show="isRight">
+                {{ chinese }}
+            </span>
+
             <span style="margin-left:34%;">Have fun!</span>
                 <span v-show="!isRight">
                     <button id="next1" type="button" @click="handleNext" class="btn btn-outline-success" style="margin-right: -15%;"
@@ -145,6 +157,7 @@
             userId: null,
             bookId: null,
             word: null,
+            chinese: null,
             rightId: null,
             clickId: null,
             rightClickNum: 0,
@@ -223,6 +236,7 @@
             getFirstWord() {
                 // console.log(this.userWordList);
                 this.word = this.userWordList[0].word;
+                this.chinese = this.userWordList[0].chinese;
                 return this.word;
             },
 

@@ -112,4 +112,14 @@ public class BookServiceImpl implements BookService {
         return graphNameList;
     }
 
+    @Override
+    public void updateWordList(Book theBook, String wordList) {
+        theBook.setWordList(wordList);
+    }
+
+    @Override
+    public Book findByName(String bookName) {
+        return bookRepository.findByName(bookName).get(0);
+    }
+
 }

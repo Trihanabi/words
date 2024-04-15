@@ -7,17 +7,25 @@ public class BookWord {
     private long first_appearance = Integer.MAX_VALUE;
     private int fk_word = -1;
 
+    private String chinese = null;
+
     public BookWord(String word, int occurence_freqence) {
         this.word = word;
         this.occurence_freqence = occurence_freqence;
     }
 
-    public BookWord(String word, int occurence_freqence,
-                    long first_appearance, int fk_word) {
+    public BookWord(String word, int occurence_freqence, String chinese) {
+        this.word = word;
+        this.occurence_freqence = occurence_freqence;
+        this.chinese = chinese;
+    }
+
+    public BookWord(String word, int occurence_freqence, long first_appearance, int fk_word, String chinese) {
         this.word = word;
         this.occurence_freqence = occurence_freqence;
         this.first_appearance = first_appearance;
         this.fk_word = fk_word;
+        this.chinese = chinese;
     }
 
     public String getWord() {
@@ -42,6 +50,14 @@ public class BookWord {
 
     public void setFirst_appearance(long first_appearance) {
         this.first_appearance = first_appearance;
+    }
+
+    public String getChinese() {
+        return chinese;
+    }
+
+    public void setChinese(String chinese) {
+        this.chinese = chinese;
     }
 
     public int getFk_word() {

@@ -11,6 +11,7 @@ public class UserWord {
     private boolean is_memory = false;
     private long first_appearance = Integer.MAX_VALUE;
     private int fk_word = -1;
+    private String chinese = null;
 
     public UserWord(String word, int occurence_freqence) {
         this.word = word;
@@ -20,7 +21,7 @@ public class UserWord {
     public UserWord(String word, int occurence_freqence,
                     int memory_level, int memory_interval,
                     boolean is_memory, long first_appearance,
-                    int fk_word) {
+                    int fk_word, String chinese) {
         this.word = word;
         this.occurence_freqence = occurence_freqence;
         this.memory_level = memory_level;
@@ -28,11 +29,21 @@ public class UserWord {
         this.is_memory = is_memory;
         this.first_appearance = first_appearance;
         this.fk_word = fk_word;
+        this.chinese = chinese;
     }
 
     public UserWord() {
 
     }
+
+
+    public UserWord(String word, int occurence_freqence, String chinese) {
+        this.word = word;
+        this.occurence_freqence = occurence_freqence;
+        this.chinese = chinese;
+    }
+
+
 
     public int getFk_word() {
         return fk_word;
@@ -91,10 +102,19 @@ public class UserWord {
         this.first_appearance = first_appearance;
     }
 
+    public String getChinese() {
+        return chinese;
+    }
+
+    public void setChinese(String chinese) {
+        chinese = chinese;
+    }
+
     @Override
     public String toString() {
         return "UserWord{" +
-                ", word='" + word + '\'' +
+                "word='" + word + '\'' +
+                ", Chinese='" + chinese + '\'' +
                 ", occurence_freqence=" + occurence_freqence +
                 ", memory_level=" + memory_level +
                 ", memory_interval=" + memory_interval +

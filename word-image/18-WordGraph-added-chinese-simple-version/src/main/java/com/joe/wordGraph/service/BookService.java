@@ -22,4 +22,8 @@ public interface BookService {
     List<BookWord> createBookWordList(Book theBook);
 
     List<String> getGraphStrs(Book theBook);
+
+    void updateWordList(Book theBook, String wordList);
+
+    Book findByName(String bookName);
 }

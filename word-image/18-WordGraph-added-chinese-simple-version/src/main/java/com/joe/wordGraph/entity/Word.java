@@ -10,7 +10,7 @@ public class Word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "word")
     private String word;
@@ -27,6 +27,9 @@ public class Word {
     @JoinColumn(name = "graph_id")
     private Graph graph;
 
+    public Word() {
+    }
+
     public Word(String word, String chinese, String phonetic_symbol, Graph graph) {
         this.word = word;
         this.chinese = chinese;
@@ -40,6 +43,11 @@ public class Word {
         this.graph = graph;
     }
 
+    public Word(String word, String chinese) {
+        this.word = word;
+        this.chinese = chinese;
+    }
+
     public Word(String word, Graph graph) {
         this.word = word;
         this.graph = graph;
@@ -49,17 +57,18 @@ public class Word {
         this.word = word;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     public String getWord() {
         return word;
     }
+
 
     public void setWord(String word) {
         this.word = word;

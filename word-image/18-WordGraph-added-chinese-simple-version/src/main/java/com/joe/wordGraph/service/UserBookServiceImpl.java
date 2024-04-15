@@ -151,7 +151,8 @@ public class UserBookServiceImpl implements UserBookService {
             String[] strs = str.split(":");
             String word = strs[0];
             int times = Integer.valueOf(strs[1]);
-            UserWord userWord = new UserWord(word, times);
+            String chinese = strs[2];
+            UserWord userWord = new UserWord(word, times, chinese);
             theUserWordList.addWord(userWord);
         }
         return theUserWordList;

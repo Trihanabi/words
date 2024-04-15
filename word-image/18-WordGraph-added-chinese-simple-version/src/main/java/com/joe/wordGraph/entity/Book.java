@@ -26,7 +26,6 @@ public class Book {
     @Column(columnDefinition="JSON", name="word_list")
     private String wordList;
 
-
     @OneToOne(fetch = FetchType.LAZY,
               cascade = {CascadeType.PERSIST, CascadeType.MERGE,
               CascadeType.DETACH, CascadeType.REFRESH})

@@ -46,10 +46,11 @@
                     <td><input type="checkbox"  class="item-checkbox"
                                                 th:checked="true"
                                                 th:field="*{wordsAndOcc}"
-                                                th:value="${bookWord.word}+':'+${bookWord.occurence_freqence}"/>
+                                                th:value="${bookWord.word}+':'+${bookWord.occurence_freqence}+':'+${bookWord.chinese}"/>
                     </td>
                     <td th:text="${bookWord.word}"> </td>
                     <td th:text="${bookWord.occurence_freqence}" ></td>
+                    <td type="hidden" name="hiddenField" th:value="${bookWord.chinese}" />
                 </tr>
             </tbody>
         </table>

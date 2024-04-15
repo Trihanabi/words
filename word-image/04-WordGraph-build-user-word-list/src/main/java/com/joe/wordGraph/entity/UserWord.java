@@ -7,7 +7,7 @@ public class UserWord {
     private String word;
     private int occurence_freqence;
     private int memory_level = 0;
-    private int memory_interval = Integer.MAX_VALUE;
+    private int memory_interval = 10000;
     private boolean is_memory = false;
     private long first_appearance = Integer.MAX_VALUE;
     private int fk_word = -1;

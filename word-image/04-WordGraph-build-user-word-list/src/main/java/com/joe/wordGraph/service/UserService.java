@@ -12,6 +12,8 @@ public interface UserService {
 
     User findById(int theId);
 
+    User findFirstByName(String name);
+
     void save(User theUser);
 
     void deleteById(int theId);

@@ -32,10 +32,25 @@ public class UserServiceImpl implements UserService{
 
         if (result.isPresent()) {
             theUser = result.get();
-        }
-        else {
+        } else {
             // we didn't find the user
             throw new RuntimeException("Did not find user id - " + theId);
+        }
+
+        return theUser;
+    }
+
+    @Override
+    public User findFirstByName(String name) {
+        List<User> result = userRepository.findByName(name);
+
+        User theUser = null;
+
+        if (!result.isEmpty()) {
+            theUser = result.get(0);
+        } else {
+            // we didn't find the user
+            throw new RuntimeException("Did not find user name - " + name);
         }
 
         return theUser;

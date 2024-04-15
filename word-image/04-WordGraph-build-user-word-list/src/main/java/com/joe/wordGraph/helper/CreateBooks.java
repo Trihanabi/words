@@ -3,22 +3,17 @@ package com.joe.wordGraph.helper;
 import com.alibaba.fastjson.JSON;
 import com.joe.wordGraph.dao.BookRepository;
 import com.joe.wordGraph.entity.Book;
-import com.joe.wordGraph.entity.BookWord;
 import com.joe.wordGraph.service.BookService;
 import com.joe.wordGraph.service.BookServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.type.descriptor.jdbc.JsonAsStringJdbcType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +33,7 @@ public class CreateBooks implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // convert files to json array objects
-        String rootPath = "C:\\Projects\\WordGraphs\\WordGraph-create-mock-user-03\\src\\main\\java\\com\\joe\\wordGraph\\book_word_list";
+        String rootPath = "C:\\Projects\\WordGraphs\\04-WordGraph-build-user-word-list\\src\\main\\java\\com\\joe\\wordGraph\\book_word_list";
         final File folder = new File(rootPath);
         final List<File> fileList = Arrays.asList(Objects.requireNonNull(folder.listFiles()));
         for (var file: fileList) {

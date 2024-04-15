@@ -23,7 +23,7 @@ public class Book {
     private String name;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition="JSON")
+    @Column(columnDefinition="JSON", name="word_list")
     private String wordList;
 
 //    @Lob
@@ -41,7 +41,7 @@ public class Book {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(
-            name = "user_book",
+            name = "users_books",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )

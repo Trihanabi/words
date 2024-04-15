@@ -1,8 +1,9 @@
 package com.joe.wordGraph.controller;
 
-import com.joe.wordGraph.entity.Book;
-import com.joe.wordGraph.entity.BookWord;
+import com.joe.wordGraph.entity.*;
 import com.joe.wordGraph.service.BookService;
+import com.joe.wordGraph.service.UserBookService;
+import com.joe.wordGraph.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,19 @@ import java.util.List;
 public class BookController {
     private BookService bookService;
 
-    public BookController(BookService theBookService) {
+    private UserService userService;
+
+    private UserBookService userBookService;
+
+    public BookController(BookService theBookService,
+                          UserService theUserService,
+                          UserBookService theUserBookService) {
+
         bookService = theBookService;
+
+        userService = theUserService;
+
+        userBookService = theUserBookService;
     }
 
     // add mapping for "/list"
@@ -32,6 +44,7 @@ public class BookController {
         return "books/list_books";
     }
 
+
     @GetMapping("/{bookId}")
     public String showBookWord(Model theModel, @PathVariable int bookId) {
 
@@ -44,16 +57,48 @@ public class BookController {
 
         theModel.addAttribute("bookWordList", bookWordList);
 
+        UserWordList userWordList = new UserWordList();
+
+        theModel.addAttribute("userWordList", userWordList);
+
         return "books/book_words";
     }
 
-//    @PostMapping("/createUserWordList")
-//    public String createUserWordList(@ModelAttribute("User") Student theStudent) {
-//        // log the input data
-//        System.out.println("theStudent: " + theStudent.getFirstName() + " " + theStudent.getLastName());
-//
-//        return "books/success_created";
-//    }
+
+    @PostMapping("/createUserWordList/{bookId}")
+    public String createUserWordList(@ModelAttribute("userWordList") UserWordList theUserWordList
+                                    , @PathVariable int bookId) {
+        // log the input data
+        System.out.println(theUserWordList);
+        // use a mock user joe
+        User theUser = userService.findFirstByName("joe");
+
+        Book theBook = bookService.findById(bookId);
+
+        Users_Books theUserBook = new Users_Books(theUser, theBook);
+
+        Users_Books.UserBookId userbookId = theUserBook.getId();
+
+        userBookService.setUserWordList(theUserWordList, theUserBook);
+
+        System.out.println(userbookId);
+
+        String userId = Integer.toString(theUser.getId());
+
+        return "redirect:/books/submit/" + userId + "&{bookId}";
+    }
+
+    @GetMapping("/submit/{userId}&{bookId}")
+    public String submit(@PathVariable int userId,
+                         @PathVariable int bookId ) {
+        Users_Books.UserBookId userBookId = new Users_Books.UserBookId(userId, bookId);
+
+        Users_Books theUserBook = userBookService.findById(userBookId);
+
+//        System.out.println(theUserBook + "has saved!!");
+
+        return "books/submit-words";
+    }
 
 //    @GetMapping("/showFormForAdd")
 //    public String showFormForAdd(Model theModel) {

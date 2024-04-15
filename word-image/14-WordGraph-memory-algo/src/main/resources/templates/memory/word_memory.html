@@ -42,13 +42,11 @@
             height: 100%;
             object-fit: cover;
         }
-
-
     </style>
 </head>
 <body>
 
-<h3>Remember word</h3>
+
 
 
 <!--      <div th:if="${showComponent}">-->
@@ -65,35 +63,37 @@
 <!--      </div>-->
 
 <!--      <div th:else>-->
-    <div id="app" >
-        <div v-if="isDataLoaded">
-            <div class="grid">
+<div id="app" >
+    <h3>Remember word: <span v-if="isDataLoaded">{{ word }}</span></h3>
+    <div v-if="isDataLoaded">
+        <div class="grid">
 
-                <!--                <div  class="grid-item"  th:each="graph, index: ${graphs}">-->
+            <!--                <div  class="grid-item"  th:each="graph, index: ${graphs}">-->
 
-                <!--                    <img th:src="@{'/static/images/' + ${graph}}" th:data-index="${index.index}"-->
-                <!--                         @click="handleImageClick" />-->
-                <div class="grid-item" v-for="(image, index) in randomGraphStrings"
-                        :key="index" :class="graphClassArray[index]"
-                        @click="handleImageClick(index)" >
-                    <img :src="'/static/images/'  + image" alt="Image">
-                </div>
+            <!--                    <img th:src="@{'/static/images/' + ${graph}}" th:data-index="${index.index}"-->
+            <!--                         @click="handleImageClick" />-->
+            <div class="grid-item" v-for="(image, index) in randomGraphStrings"
+                    :key="index" :class="graphClassArray[index]"
+                    @click="handleImageClick(index)" >
+                <img :src="'/static/images/'  + image" alt="Image">
             </div>
-            <p style="margin-left:19%;">Have fun!</p>
         </div>
-        <div v-else>
-            <!-- 显示加载中的提示或动画 -->
-            <p>Loading...</p>
-        </div>
+        <p style="margin-left:20%;">Have fun!</p>
         <p v-show="!isRight">
-            <button type="button" class="btn btn-outline-success" style="margin-left: 19%;"
+            <button type="button" @click="handleClick" class="btn btn-outline-success" style="margin-left: 19%;"
             disabled="true">Success</button>
         </p>
         <p v-show="isRight">
-            <button type="button" class="btn btn-outline-success" style="margin-left: 19%;">
+            <button type="button" @click="handleClick" class="btn btn-outline-success" style="margin-left: 19%;">
                 Success</button>
         </p>
     </div>
+    <div v-else>
+        <!-- 显示加载中的提示或动画 -->
+        <p>Loading...</p>
+    </div>
+    
+</div>
 </body>
 <script th:inline="javascript">
   /* 将数据存储在全局变量中 */
@@ -102,6 +102,8 @@
 
 <script th:inline="javascript">
 <!--    import axios from 'axios';-->
+    Vue.prototype.$REMEMBERED_LEVEL = 20; 
+    Vue.prototype.$INTERVAL_FACTOR = 10; 
     new Vue({
         el: '#app',
         data: {
@@ -135,7 +137,9 @@
                 this.isDataLoaded = true;
             }, 3000);
             this.setRightId();
+            this.sortedList(this.userWordList);
         },
+
         methods: {
             // 处理点击
             handleImageClick(index) {
@@ -180,7 +184,7 @@
                 return axios.get(`/data/graphs/${this.bookId}`);
             },
             // 从单词列表中按照记忆优先级得到一个单词
-            getOneWord() {
+            getFirstWord() {
                 console.log(this.userWordList);
                 this.word = this.userWordList[0].word;
                 return this.word;
@@ -189,7 +193,8 @@
             // 根据单词得到图片
             getGraphsStrings(word) {
                 const randomSet = new Set();
-                randomSet.add(word + '.jpg');
+                const wordImage = word + '.jpg';
+                randomSet.add(wordImage);
 
                 // 随机选择字符串
                 while (randomSet.size < 8 ) {
@@ -197,24 +202,31 @@
                     const randomString = this.graphs[randomIndex];
                     randomSet.add(randomString);
                 }
-
                 // 将Set转换为数组
-                this.randomGraphStrings = Array.from(randomSet);
+                var tempStrings = Array.from(randomSet);
+                tempStrings.shift();
+                const randomIndex = Math.floor(Math.random() * (tempStrings.length + 1));
+                // 使用 splice() 方法在随机位置插入单词
+                tempStrings.splice(randomIndex, 0, wordImage);
+                this.setRightIdByIndex(randomIndex);
+                // 将Set转换为数组
+                this.randomGraphStrings = tempStrings;
                 console.log(this.randomGraphStrings);
             },
 
-           async executeMethods() {
-              try {
-                await this.method1();
-                await this.method2();
-                await this.method3();
-                await this.method4();
-                // 三个方法都执行完成后的逻辑
-              } catch (error) {
-                // 错误处理
-                console.error(error);
-              }
-           },
+            //加载数据
+            async executeMethods() {
+                try {
+                    await this.method1();
+                    await this.method2();
+                    await this.method3();
+                    await this.method4();
+                    // 三个方法都执行完成后的逻辑
+                } catch (error) {
+                    // 错误处理
+                    console.error(error);
+                }
+            },
 
             method1() {
                 return new Promise((resolve, reject) => {
@@ -228,44 +240,44 @@
                 });
             },
 
-           method2() {
-              return new Promise((resolve, reject) => {
-                  // 方法2的逻辑，包括异步的Ajax请求
+            method2() {
+                return new Promise((resolve, reject) => {
+                    // 方法2的逻辑，包括异步的Ajax请求
 
-                    setTimeout(() => {
-                    this.getOneWord();
-                        resolve('Function 2 executed.');
-                      }, 1000);
-                  // 在请求成功后调用 resolve()
-                  // 在请求失败时调用 reject()
-              });
-           },
+                        setTimeout(() => {
+                        this.getFirstWord();
+                            resolve('Function 2 executed.');
+                        }, 1000);
+                    // 在请求成功后调用 resolve()
+                    // 在请求失败时调用 reject()
+                });
+            },
 
-           method3() {
-              return new Promise((resolve, reject) => {
-                  // 方法3的逻辑，包括异步的Ajax请求
+            method3() {
+                return new Promise((resolve, reject) => {
+                    // 方法3的逻辑，包括异步的Ajax请求
 
-                    setTimeout(() => {
-                    this.getGraphsStrings(this.word);
-                        resolve('Function 3 executed.');
-                      }, 1000);
-                  // 在请求成功后调用 resolve()
-                  // 在请求失败时调用 reject()
-              });
-           },
+                        setTimeout(() => {
+                        this.getGraphsStrings(this.word);
+                            resolve('Function 3 executed.');
+                        }, 1000);
+                    // 在请求成功后调用 resolve()
+                    // 在请求失败时调用 reject()
+                });
+            },
 
-           method4() {
-              return new Promise((resolve, reject) => {
-                  // 方法3的逻辑，包括异步的Ajax请求
+            method4() {
+                return new Promise((resolve, reject) => {
+                    // 方法3的逻辑，包括异步的Ajax请求
 
-                    setTimeout(() => {
-                    this.setRightId();
-                        resolve('Function 4 executed.');
-                      }, 1000);
-                  // 在请求成功后调用 resolve()
-                  // 在请求失败时调用 reject()
-              });
-           },
+                        setTimeout(() => {
+                        this.setRightId();
+                            resolve('Function 4 executed.');
+                        }, 1000);
+                    // 在请求成功后调用 resolve()
+                    // 在请求失败时调用 reject()
+                });
+            },
 
             setRightId() {
                 const correctAnswer = this.word + '.jpg';
@@ -279,66 +291,94 @@
                 })
             },
 
-            // 对数组进行排序
-            sortedList(list) {
-                 return list.slice().sort(this.memoryComparator);
+            setRightIdByIndex(index) {
+                this.rightId = index;
             },
 
+            handleClick() {
+                // 在这里定义按钮点击时的逻辑
+                this.moveElementToCorrectPosition(this.userWordList, 0, this.memoryComparator);
+                this.getFirstWord();
+                this.getGraphsStrings(this.word);
+                this.removeBorder();
+                this.isRight = false;
+            },
+
+            // 对数组进行排序
+            sortedList(list) {
+                return list.slice().sort(this.memoryComparator());
+            },
 
             // 修改首项后使用插入排序
-            moveElementToCorrectPosition(list, index, memoryComparator) {
-              const element = list[index];
-              let i = index + 1;
+            moveElementToCorrectPosition(list, index) {
+                const element = list[index];
+                let i = index + 1;
+                let interval = list[index].memory_interval;
+                while (i <= list.length - 1 
+                    && this.memoryComparator(element, list[i]) < 0
+                    && interval > 0) {
+                    list[i-1] = list[i];
+                    i++;
+                    interval--;
+                }
 
-              while (i < list.length - 1 && memoryComparator(element, list[i]) < 0) {
-                list[i] = list[i+1];
-                i++;
-              }
-
-              list[i + 1] = element;
+                list[i-1] = element;
             },
 
             // comparator
             memoryComparator(w1, w2) {
-                 if (!w1.is_memory() && !w2.is_memory()) {
+                if (!w1.is_memory && !w2.is_memory) {
                     // todo: more complex compare rule
-                    if (w1.occurence_freqence() > w2.occurence_freqence()) {
-                        return 1;
-                    } else {
+                    if (w1.memory_level > w2.memory_level) {
                         return -1;
+                    } else {
+                        return 1;
                     }
-                  }
-                  else if (!w1.is_memory()) {
-                      return -1;
-                  } else if (!w2.is_memory()) {
-                      return 1;
-                  } else {
-                      return 0;Ss
-                  }
+                }
+                else if (!w1.is_memory) {
+                    return 1;
+                } else if (!w2.is_memory) {
+                    return -1;
+                } else {
+                    return 0;
+                }
             },
 
             // 点击正确，修改数据
             clickRight(index) {
-                // this.userWordList[index].memory_level += 2;
+                this.setWordMemoryLevel(2);
                 console.log('inClickRight' + ' '+ index);
                 const newGraphClassArray = [...this.graphClassArray];
                 newGraphClassArray[index] = "rounded-1 border border-4 border border-success";
                 this.graphClassArray = newGraphClassArray;
-               
                 console.log('inClickRight' + ' '+ this.isRight);
                 this.isRight = true;
             },
 
             // 点击错误，修改数据
             clickWrong(index) {
+                console.log('in clickWrong()' + ' '+ index);
+                this.setWordMemoryLevel(-1);
                 console.log('inClickWrong' + ' '+ index);
                 const newGraphClassArray = [...this.graphClassArray];
                 // this.userWordList[index].memory_level += 1;
                 newGraphClassArray[index] = 'rounded-1 border border-4 border border-danger';
-                this.graphClassArray = newGraphClassArray;
-               
+                this.graphClassArray = newGraphClassArray; 
             },
 
+            setWordMemoryLevel(variation) {
+                this.userWordList[0].memory_level += variation;
+                const level = this.userWordList[0].memory_level;
+                console.log('in setWordMemoryLevel()' + ' '+ variation);
+                if (level >= this.$REMEMBERED_LEVEL) {
+                    this.userWordList[0].is_memory = true;
+                }
+                this.userWordList[0].memory_interval = level * this.$INTERVAL_FACTOR;
+            },
+
+            removeBorder() {
+                this.graphClassArray = Array(8).fill("rounded-1");
+            },
         }
      })
 </script>

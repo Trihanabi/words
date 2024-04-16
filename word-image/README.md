@@ -21,12 +21,12 @@ main
 └── resources  
 &thinsp;&emsp;&emsp;├── static.images: webp格式的图片库  
 &thinsp;&emsp;&emsp;└── templates  
-&thinsp;&emsp;&emsp;&emsp;&emsp;├── books  
-&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
-&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
-&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
-&thinsp;&emsp;&emsp;&emsp;&emsp;└── memory  
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
+&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;├── books  
+&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
+&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
+&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
+&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;└── memory  
+&thinsp;&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
 
 
 ### 目标

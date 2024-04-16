@@ -9,22 +9,22 @@
 Choice object by index: 1
 main  
 ├── java.com.joe.wordImage  
- │&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
- │&emsp;&emsp;├── controller: 控制器  
- │&emsp;&emsp;├── dao: 数据访问层  
- │&emsp;&emsp;├── entity: 实体类  
- │&emsp;&emsp;├── helper  
- │&emsp;&emsp;│&emsp;&emsp;├── CreateBooks.java: 构建书籍词汇列表  
- │&emsp;&emsp;│&emsp;&emsp;└── CreateMockUser.java: 创建虚拟用户（用户功能为下一步计划）  
- │&emsp;&emsp;├── service: 服务层  
- │&emsp;&emsp;└── JoeApplication: 应用程序  
+|&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
+&thinsp;│&emsp;&emsp;├── controller: 控制器  
+&thinsp;│&emsp;&emsp;├── dao: 数据访问层  
+&thinsp;│&emsp;&emsp;├── entity: 实体类  
+&thinsp;│&emsp;&emsp;├── helper  
+&thinsp;│&emsp;&emsp;&thinsp;│&emsp;&emsp;├── CreateBooks.java: 构建书籍词汇列表  
+&thinsp;│&emsp;&emsp;&thinsp;│&emsp;&emsp;└── CreateMockUser.java: 创建虚拟用户（用户功能为下一步计划）  
+&thinsp;│&emsp;&emsp;├── service: 服务层  
+&thinsp;│&emsp;&emsp;└── JoeApplication: 应用程序  
 └── resources  
 &emsp;&emsp;├── static.images: webp格式的图片库  
 &emsp;&emsp;└── templates  
 &emsp;&emsp;&emsp;&emsp;├── books  
-&emsp;&emsp;&emsp;&emsp;│&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
-&emsp;&emsp;&emsp;&emsp;│&emsp;&emsp;├── list_books.html: 书籍列表页面   
-&emsp;&emsp;&emsp;&emsp;│&emsp;&emsp;└── submit-words.html: 提交单词页面  
+&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
+&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;├── list_books.html: 书籍列表页面   
+&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;└── submit-words.html: 提交单词页面  
 &emsp;&emsp;&emsp;&emsp;└── memory  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
 
@@ -35,19 +35,19 @@ main
 3. 下一步：用户自我构建单词列表并能分享
 
 ### 下一步中需考虑的衡量因素
-1. 它能帮助人记忆单词：
-&nbsp;&nbsp;&nbsp;&nbsp; 1.1 短期记忆：10分钟内能记忆的单词数
-&nbsp;&nbsp;&nbsp;&nbsp; 1.2 长时间记忆：能牢记和快速反应的单词数
-2. 它能帮助人开始阅读一本英文书
-&nbsp;&nbsp;&nbsp;&nbsp; 2.1 使用后对人们阅读不同难度书籍停顿次数的减少
+1. 它能帮助人记忆单词：   
+&nbsp;&nbsp;&nbsp;&nbsp; 1.1 短期记忆：10分钟内能记忆的单词数   
+&nbsp;&nbsp;&nbsp;&nbsp; 1.2 长时间记忆：能牢记和快速反应的单词数  
+2. 它能帮助人开始阅读一本英文书   
+&nbsp;&nbsp;&nbsp;&nbsp; 2.1 使用后对人们阅读不同难度书籍停顿次数的减少  
 
-### Plan & Next steps
-- [ ] 1. 增加用户功能  
-- [ ] 2. 完善图片集  
-- [ ] 3. 完善用户记忆过程  
-&nbsp;&nbsp;&nbsp;&nbsp; - [ ] 3.1 完善单词列表的排序，让它更符合记忆规律  
-&nbsp;&nbsp;&nbsp;&nbsp; - [ ] 3.2 完善记忆积分，提供即时的反馈  
-- [ ] 4. 增加分析上传文本功能
+### Plan & Next steps  
+- [ ] 1. 增加用户功能    
+- [ ] 2. 完善图片集   
+- [ ] 3. 完善用户记忆过程         
+&nbsp;&nbsp;&nbsp;&nbsp; - [ ] 3.1 完善单词列表的排序，让它更符合记忆规律     
+&nbsp;&nbsp;&nbsp;&nbsp; - [ ] 3.2 完善记忆积分，提供即时的反馈    
+- [ ] 4. 增加分析上传文本功能     
 
 
 ### 问题

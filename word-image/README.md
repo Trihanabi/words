@@ -6,25 +6,25 @@
 ![alt text](page-flow4.svg)
 
 ### 文件结构
-Choice object by index: 1
-main  
+Choice object by index: 1   
+main   
 ├── java.com.joe.wordImage  
-|&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
-&thinsp;│&emsp;&emsp;├── controller: 控制器  
-&thinsp;│&emsp;&emsp;├── dao: 数据访问层  
-&thinsp;│&emsp;&emsp;├── entity: 实体类  
-&thinsp;│&emsp;&emsp;├── helper  
-&thinsp;│&emsp;&emsp;&thinsp;│&emsp;&emsp;├── CreateBooks.java: 构建书籍词汇列表  
-&thinsp;│&emsp;&emsp;&thinsp;│&emsp;&emsp;└── CreateMockUser.java: 创建虚拟用户（用户功能为下一步计划）  
-&thinsp;│&emsp;&emsp;├── service: 服务层  
-&thinsp;│&emsp;&emsp;└── JoeApplication: 应用程序  
+&thinsp;|&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
+&thinsp;|&emsp;&emsp;├── controller: 控制器  
+&thinsp;|&emsp;&emsp;├── dao: 数据访问层  
+&thinsp;|&emsp;&emsp;├── entity: 实体类  
+&thinsp;|&emsp;&emsp;├── helper  
+&thinsp;|&emsp;&emsp;&thinsp;|&emsp;&emsp;├── CreateBooks.java: 构建书籍词汇列表  
+&thinsp;|&emsp;&emsp;&thinsp;|&emsp;&emsp;└── CreateMockUser.java: 创建虚拟用户（用户功能为下一步计划）  
+&thinsp;|&emsp;&emsp;├── service: 服务层  
+&thinsp;|&emsp;&emsp;└── JoeApplication: 应用程序  
 └── resources  
 &emsp;&emsp;├── static.images: webp格式的图片库  
 &emsp;&emsp;└── templates  
 &emsp;&emsp;&emsp;&emsp;├── books  
-&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
-&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;├── list_books.html: 书籍列表页面   
-&emsp;&emsp;&emsp;&emsp;&thinsp;│&emsp;&emsp;└── submit-words.html: 提交单词页面  
+&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
+&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
+&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
 &emsp;&emsp;&emsp;&emsp;└── memory  
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
 

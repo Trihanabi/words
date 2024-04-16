@@ -5,8 +5,7 @@
 ### 程序先前计划
 ![alt text](page-flow4.svg)
 
-### 文件结构
-Choice object by index: 1   
+### 文件结构  
 main   
 ├── java.com.joe.wordImage  
 &thinsp;|&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
@@ -19,14 +18,14 @@ main
 &thinsp;|&emsp;&emsp;├── service: 服务层  
 &thinsp;|&emsp;&emsp;└── JoeApplication: 应用程序  
 └── resources  
-&thinsp;&emsp;&emsp;├── static.images: webp格式的图片库  
-&thinsp;&emsp;&emsp;└── templates  
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;├── books  
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
-&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;└── memory  
-&thinsp;&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
+&thinsp;&thinsp;&emsp;&emsp;├── static.images: webp格式的图片库  
+&thinsp;&thinsp;&emsp;&emsp;└── templates  
+&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;├── books  
+&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
+&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
+&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
+&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;└── memory  
+&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
 
 
 ### 目标

@@ -6,26 +6,65 @@
 ![alt text](page-flow4.svg)
 
 #### 文件结构  
-main   
-├── java.com.joe.wordImage  
-&thinsp;|&emsp;&emsp;├── book_word_list: 各书高频非容易词列表  
-&thinsp;|&emsp;&emsp;├── controller: 控制器  
-&thinsp;|&emsp;&emsp;├── dao: 数据访问层  
-&thinsp;|&emsp;&emsp;├── entity: 实体类  
-&thinsp;|&emsp;&emsp;├── helper  
-&thinsp;|&emsp;&emsp;&thinsp;|&emsp;&emsp;├── CreateBooks.java: 构建书籍词汇列表  
-&thinsp;|&emsp;&emsp;&thinsp;|&emsp;&emsp;└── CreateMockUser.java: 创建虚拟用户（用户功能为下一步计划）  
-&thinsp;|&emsp;&emsp;├── service: 服务层  
-&thinsp;|&emsp;&emsp;└── JoeApplication: 应用程序  
-└── resources  
-&thinsp;&thinsp;&emsp;&emsp;├── static.images: webp格式的图片库  
-&thinsp;&thinsp;&emsp;&emsp;└── templates  
-&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;├── books  
-&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── book_words.html: 书籍单词选择页面  
-&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;├── list_books.html: 书籍列表页面   
-&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&thinsp;|&emsp;&emsp;└── submit-words.html: 提交单词页面  
-&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;└── memory  
-&thinsp;&thinsp;&thinsp;&thinsp;&thinsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;└── word_memory.html: 记忆单词页面（包含操作单词列表的逻辑）  
+```
+19-WordImage-refactor-simple-version/src/
+├── main/  
+│   ├── java/
+│   │   com/
+│   │   joe/
+│   │   wordImage/
+│   │   ├── JoeApplication.java
+│   │   ├── book_word_list/           # 各书高频非容易词列表  
+│   │   ├── controller/               # 控制器
+│   │   │   ├── BookController.java
+│   │   │   ├── DataController.java
+│   │   │   └── MemoryController.java
+│   │   ├── dao/                      # 数据访问层  
+│   │   │   ├── BookRepository.java
+│   │   │   ├── GraphRepository.java
+│   │   │   ├── UserBookRepository.java
+│   │   │   ├── UserRepository.java
+│   │   │   └── WordRepository.java
+│   │   ├── entity/                   # 实体类  
+│   │   │   ├── Book.java
+│   │   │   ├── BookWord.java  
+│   │   │   ├── Graph.java
+│   │   │   ├── User.java
+│   │   │   ├── UserWord.java
+│   │   │   ├── UserWordList.java
+│   │   │   ├── Users_Books.java
+│   │   │   ├── Word.java
+│   │   │   └── WordList.java
+│   │   ├── helper/
+│   │   │   ├── CreateBooks.java      # 用于构建书籍词汇列表 
+│   │   │   ├── CreateMockUsers.java  # 用于创建虚拟用户（用户功能为下一步计划）  
+│   │   │   └── Test.java
+│   │   └── service/                  # 服务层 
+│   │       ├── BookService.java
+│   │       ├── BookServiceImpl.java
+│   │       ├── UserBookService.java
+│   │       ├── UserBookServiceImpl.java
+│   │       ├── UserService.java
+│   │       ├── UserServiceImpl.java
+│   │       ├── WordService.java
+│   │       └── WordServiceImpl.java
+│   └── resources/      
+│       ├── static.images:             # webp格式的图片库           
+│       ├── application.properties
+│       └── templates/
+│           ├── books/
+│           │   ├── book_words.html    # 书籍单词选择页面  
+│           │   ├── list_books.html    # 书籍列表页面   
+│           │   └── submit-words.html  # 交单词页面 
+│           └── memory/
+│               └── word_memory.html   # 记忆单词页面（包含操作单词列表的逻辑） 
+└── test/
+    java/
+    com/
+    joe/
+    wordImage/
+    └── JoeApplicationTests.java
+```
 
 
 #### 目标

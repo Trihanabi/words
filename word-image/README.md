@@ -14,18 +14,18 @@
 │   │   joe/
 │   │   wordImage/
 │   │   ├── JoeApplication.java
-│   │   ├── book_word_list/           # 各书高频非容易词列表  
-│   │   ├── controller/               # 控制器
+│   │   ├── book_word_list/          # 各书高频非容易词列表  
+│   │   ├── controller/              # 控制器
 │   │   │   ├── BookController.java
 │   │   │   ├── DataController.java
 │   │   │   └── MemoryController.java
-│   │   ├── dao/                      # 数据访问层  
+│   │   ├── dao/                     # 数据访问层  
 │   │   │   ├── BookRepository.java
 │   │   │   ├── GraphRepository.java
 │   │   │   ├── UserBookRepository.java
 │   │   │   ├── UserRepository.java
 │   │   │   └── WordRepository.java
-│   │   ├── entity/                   # 实体类  
+│   │   ├── entity/                  # 实体类  
 │   │   │   ├── Book.java
 │   │   │   ├── BookWord.java  
 │   │   │   ├── Graph.java
@@ -36,10 +36,10 @@
 │   │   │   ├── Word.java
 │   │   │   └── WordList.java
 │   │   ├── helper/
-│   │   │   ├── CreateBooks.java      # 用于构建书籍词汇列表 
-│   │   │   ├── CreateMockUsers.java  # 用于创建虚拟用户（用户功能为下一步计划）  
+│   │   │   ├── CreateBooks.java     # 用于构建书籍词汇列表 
+│   │   │   ├── CreateMockUsers.java # 用于创建虚拟用户（用户功能为下一步计划）  
 │   │   │   └── Test.java
-│   │   └── service/                  # 服务层 
+│   │   └── service/                 # 服务层 
 │   │       ├── BookService.java
 │   │       ├── BookServiceImpl.java
 │   │       ├── UserBookService.java
@@ -49,15 +49,15 @@
 │   │       ├── WordService.java
 │   │       └── WordServiceImpl.java
 │   └── resources/      
-│       ├── static.images:             # webp格式的图片库           
+│       ├── static.images:            # webp格式的图片库           
 │       ├── application.properties
 │       └── templates/
 │           ├── books/
-│           │   ├── book_words.html    # 书籍单词选择页面  
-│           │   ├── list_books.html    # 书籍列表页面   
-│           │   └── submit-words.html  # 交单词页面 
+│           │   ├── book_words.html   # 书籍单词选择页面  
+│           │   ├── list_books.html   # 书籍列表页面   
+│           │   └── submit-words.html # 交单词页面 
 │           └── memory/
-│               └── word_memory.html   # 记忆单词页面（包含操作单词列表的逻辑） 
+│               └── word_memory.html  # 记忆单词页面（包含操作单词列表的逻辑） 
 └── test/
     java/
     com/
